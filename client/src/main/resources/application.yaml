@@ -2,6 +2,16 @@ spring:
   main:
     web-application-type: none
     banner-mode: "off"
+  profiles:
+    active: https
+logging:
+  level:
+    root: OFF
+---
+spring:
+  config:
+    activate:
+      on-profile: https
   ssl:
     bundle:
       jks:
@@ -12,6 +22,3 @@ spring:
             location: "classpath:truststore.p12"
             password: "abcdefg"
             type: "PKCS12"
-logging:
-  level:
-    root: OFF

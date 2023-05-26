@@ -1,6 +1,23 @@
 spring:
   main:
       banner-mode: "off"
+  profiles:
+    active: https
+server:
+  port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    root: OFF
+---
+spring:
+  config:
+    activate:
+      on-profile: https
   ssl:
     bundle:
       jks:
@@ -12,14 +29,5 @@ spring:
             password: "abcdefg"
             type: "PKCS12"
 server:
-  port: 8080
   ssl:
     bundle: "server"
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-logging:
-  level:
-    root: OFF
