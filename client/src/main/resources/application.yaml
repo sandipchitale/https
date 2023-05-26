@@ -1,0 +1,17 @@
+spring:
+  main:
+    web-application-type: none
+    banner-mode: "off"
+  ssl:
+    bundle:
+      jks:
+        client:
+          # key:
+          #   alias: "localhost"
+          truststore:
+            location: "classpath:truststore.p12"
+            password: "abcdefg"
+            type: "PKCS12"
+logging:
+  level:
+    root: OFF

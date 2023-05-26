@@ -1,0 +1,25 @@
+spring:
+  main:
+      banner-mode: "off"
+  ssl:
+    bundle:
+      jks:
+        server:
+          key:
+            alias: "localhost"
+          keystore:
+            location: "classpath:keystore.p12"
+            password: "abcdefg"
+            type: "PKCS12"
+server:
+  port: 8080
+  ssl:
+    bundle: "server"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    root: OFF
