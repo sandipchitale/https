@@ -18,6 +18,10 @@ spring:
         client:
           # key:
           #   alias: "localhost"
+          keystore:
+            location: "classpath:keystore.p12"
+            password: "abcdefg"
+            type: "PKCS12"
           truststore:
             location: "classpath:truststore.p12"
             password: "abcdefg"

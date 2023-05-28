@@ -28,6 +28,11 @@ spring:
             location: "classpath:keystore.p12"
             password: "abcdefg"
             type: "PKCS12"
+          truststore:
+            location: "classpath:truststore.p12"
+            password: "abcdefg"
+            type: "PKCS12"
 server:
   ssl:
+    client-auth: "need"
     bundle: "server"
