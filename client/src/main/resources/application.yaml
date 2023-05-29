@@ -1,12 +1,27 @@
 spring:
   main:
-    web-application-type: none
+#    web-application-type: none
     banner-mode: "off"
   profiles:
-    active: https
+    active:
+      - https
+      - https-two-way-tls
 logging:
   level:
     root: OFF
+server:
+  port: 8090
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    env:
+      keys-to-sanitize:
+      show-values: ALWAYS
+    config-props:
+      show-values: ALWAYS
 ---
 spring:
   config:
@@ -16,13 +31,22 @@ spring:
     bundle:
       jks:
         client:
-          # key:
-          #   alias: "localhost"
-          keystore:
-            location: "classpath:keystore.p12"
-            password: "abcdefg"
-            type: "PKCS12"
           truststore:
             location: "classpath:truststore.p12"
+            password: "abcdefg"
+            type: "PKCS12"
+---
+spring:
+  config:
+    activate:
+      on-profile: https-two-way-tls
+  ssl:
+    bundle:
+      jks:
+        client:
+          key:
+            alias: "localhost"
+          keystore:
+            location: "classpath:keystore.p12"
             password: "abcdefg"
             type: "PKCS12"

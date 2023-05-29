@@ -2,7 +2,9 @@ spring:
   main:
       banner-mode: "off"
   profiles:
-    active: https
+    active:
+    - https
+#    - https-two-way-tls
 server:
   port: 8080
 management:
@@ -10,6 +12,12 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    env:
+      keys-to-sanitize:
+      show-values: ALWAYS
+    config-props:
+      show-values: ALWAYS
 logging:
   level:
     root: OFF
@@ -28,6 +36,19 @@ spring:
             location: "classpath:keystore.p12"
             password: "abcdefg"
             type: "PKCS12"
+server:
+  ssl:
+    client-auth: "want"
+    bundle: "server"
+---
+spring:
+  config:
+    activate:
+      on-profile: https-two-way-tls
+  ssl:
+    bundle:
+      jks:
+        server:
           truststore:
             location: "classpath:truststore.p12"
             password: "abcdefg"
@@ -35,4 +56,3 @@ spring:
 server:
   ssl:
     client-auth: "need"
-    bundle: "server"
