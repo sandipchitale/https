@@ -1,6 +1,6 @@
 spring:
   main:
-#    web-application-type: none
+    web-application-type: NONE
     banner-mode: "off"
   profiles:
     active:
@@ -9,6 +9,12 @@ spring:
 logging:
   level:
     root: OFF
+    org:
+      apache:
+        hc:
+          client5:
+            http:
+              wire: DEBUG
 server:
   port: 8090
 management:

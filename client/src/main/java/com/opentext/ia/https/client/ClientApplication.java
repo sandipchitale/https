@@ -8,6 +8,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
@@ -22,6 +23,8 @@ public class ClientApplication {
 
 		CLR(Environment environment, RestTemplateBuilder restTemplateBuilder, SslBundles sslBundles) {
 			this.environment = environment;
+			// Use httpclient5 so that we can log request and response
+			restTemplateBuilder = restTemplateBuilder.requestFactory(HttpComponentsClientHttpRequestFactory.class);
 			if (environment.acceptsProfiles(Profiles.of("https"))) {
 				restTemplateBuilder = restTemplateBuilder.setSslBundle(sslBundles.getBundle("client"));
 			}
